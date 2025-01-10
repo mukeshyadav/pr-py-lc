@@ -1,0 +1,70 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Langchain Linkedin App</title>
+</head>
+<body>
+
+<div class="container mx-auto px-4 py-2">
+<h1 class="text-xlg">LangChain LinkedIn</h1>
+
+    <form id="langchain">
+        <input type="text" class="rounded border-2" name="name" placeholder="Please enter name" />
+        <button type="submit" class="rounded border-2 bg-slate-500">Submit</button>
+    </form>
+
+    <div class="container mx-auto px-6 py-4">
+        <div class="rounded">
+            <img id="profile-pic" src=""/>
+        </div>
+        <h3 class="text-lg">Summary</h3>
+        <p id="summary"></p>
+        <h3 class="text-lg">Interesting Facts</h3>
+        <p id="facts"></p>
+    </div>
+
+
+</div>
+
+<script type="text/javascript">
+    const form = document.getElementById("langchain");
+    const result = document.getElementById("result");
+
+    form.addEventListener("submit", e => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        fetch("/process", {method: "POST", body: formData})
+        .then(res => {
+            if(res.ok){
+                return res.json();
+            } else {
+                throw new Error("POST request failed");
+            }
+        }).then(data => {
+            document.getElementById("profile-pic").src=data.picture_url;
+            document.getElementById("summary").textContent = data.summary_and_facts.summary;
+
+            createHtmlList(document.getElementById("facts"), data.summary_and_facts.facts);
+
+        })
+    });
+
+    function createHtmlList(elem, items){
+        const ul = document.createElement("ul");
+        items.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            ul.appendChild(li);
+        })
+        elem.innerHTML="";
+        elem.appendChild(ul);
+    }
+</script>
+
+</body>
+</html>
