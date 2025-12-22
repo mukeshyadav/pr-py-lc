@@ -594,11 +594,12 @@
         },
         "marshmallow": {
             "hashes": [
-                "sha256:bcaf2d6fd74fb1459f8450e85d994997ad3e70036452cbfa4ab685acb19479b3",
-                "sha256:c448ac6455ca4d794773f00bae22c2f351d62d739929f761dce5eacb5c468d7f"
+                "sha256:013fa8a3c4c276c24d26d84ce934dc964e2aa794345a0f8c7e5a7191482c8a73",
+                "sha256:bbe2adb5a03e6e3571b573f42527c6fe926e17467833660bebd11593ab8dfd57"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.9'",
-            "version": "==3.23.2"
+            "version": "==3.26.2"
         },
         "multidict": {
             "hashes": [
